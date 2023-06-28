@@ -1,4 +1,4 @@
-const get = (url: string, options: any) => {
+const get = (url: string) => {
   return fetch(url, {
     method: "GET",
     headers: {

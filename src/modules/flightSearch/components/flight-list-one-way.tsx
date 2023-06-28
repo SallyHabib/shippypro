@@ -11,18 +11,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import FlightItem from "./flight-item";
 import { Skeleton } from "@mui/material";
-export type FlightObj = {
-  flightNbr: string,
-  airlineName: string,
-  airlineLogo: string,
-  deptTime: string,
-  deptCity: string,
-  arivalTime: string,
-  arivalCity: string,
-  noOfStops: string,
-  price: string
-}
-
+import { IFlightItem } from "../../../types/FlightItem";
 
 const FlightListOneWay = () => {
   const flightsState = useSelector((state: any) => state.flights);
@@ -31,6 +20,7 @@ const FlightListOneWay = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   let component = null;
+
   const handleChangePage = (
     _: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number,
@@ -57,7 +47,7 @@ const FlightListOneWay = () => {
       <Table>
         <TableBody>
           {flightsState.result
-            .map((val: FlightObj, index: number) => {
+            .map((val: IFlightItem, index: number) => {
               return (
                 <TableRow key={index}>
                   <TableCell>

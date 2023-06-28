@@ -1,8 +1,8 @@
 import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
-import { FlightObj } from "./flight-list-one-way";
 import { makeStyles } from "@material-ui/core/styles";
 import {SteppedLineTo} from 'react-lineto';
 import { thousandSeparator } from "../../../utils/global-services";
+import { IFlightItem } from "../../../types/FlightItem";
 
 const useStyles = makeStyles(() => ({
     textAlign: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 type FlightItemProps = {
-    flightItem: FlightObj;
+    flightItem: IFlightItem;
     index: number;
 }
   

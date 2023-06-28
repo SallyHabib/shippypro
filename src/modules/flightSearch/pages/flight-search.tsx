@@ -1,5 +1,5 @@
 import  { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Autocomplete,
   Grid,
@@ -11,12 +11,9 @@ import {
   Typography
 } from '@mui/material';
 import { validateSearch } from "../../../utils/global-services";
-
-import CityJSON from "../../../mocks/cities.json";
 import { FlightsActions } from "../state/actions";
 import FlightListOneWay from "../components/flight-list-one-way";
-
-const cities = [...CityJSON];
+import { IAirportType } from "../../../types/AirportType";
 
 const FlightSearch = () => {
   const sourceRef = useRef<string | undefined>("");
@@ -32,7 +29,7 @@ const FlightSearch = () => {
   const [inputDest, setInputDest] = useState("");
   const [cityError, setCityError] = useState(false);
   const dispatch = useDispatch();
-
+  const airports = useSelector((state: any) => state.flights.airports) as IAirportType[];
   // On Page Load
   useEffect(() => {
     // Reset Flight List
@@ -41,6 +38,9 @@ const FlightSearch = () => {
     });
   }, []);
 
+  useEffect(() => {
+   dispatch({type: FlightsActions.GET_AIRPORTS_LIST})
+  },[])
   /**
    * @function handleSource
    * @param {object} newVal
@@ -147,7 +147,7 @@ const FlightSearch = () => {
             setInputSource(newInputValue);
           }}
           getOptionLabel={(option) => option}
-          options={cities.map((city)=> city.name)}
+          options={airports.map((city:any)=> city.name)}
           style={{ width: 300 }}
           renderInput={(params) => (
             <TextField {...params} label="Source City" variant="outlined" />
@@ -165,7 +165,7 @@ const FlightSearch = () => {
             setInputDest(newInputValue);
           }}
           getOptionLabel={(option) => option}
-          options={cities.map((city)=> city.name)}
+          options={airports.map((city: any)=> city.name)}
           style={{ width: 300 }}
           renderInput={(params) => (
             <TextField
