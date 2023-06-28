@@ -1,21 +1,21 @@
-import React, { lazy, Suspense } from "react";
-
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Grid, CssBaseline, Container, Toolbar } from "@material-ui/core";
-
 import "../../styles.css";
+import { AppBar, Typography } from "@mui/material";
 
-const Dashboard = lazy(() => import("./dashboard"));
-// const Confirmation = lazy(() => import("../confirmation/confirmation"));
 const FlightSearch = lazy(() => import("../flightSearch/pages/flight-search"));
-// const FlightBooking = lazy(() => import("../booking/flight-booking"));
 
 const Home = () => {
   return (
     <div className="root">
       <CssBaseline />
       <Router>
-        {/* <Header /> */}
+        <AppBar>
+          <Toolbar>
+            <Typography>{`Flight Booking App`}</Typography>
+          </Toolbar>
+        </AppBar>
         <Toolbar />
         <Container>
           <Grid container>
@@ -23,20 +23,7 @@ const Home = () => {
               <>
                 <Suspense fallback={<div>Loading...</div>}>
                   <Routes>
-                    <Route path={`/`} Component={Dashboard} />
-                    <Route
-                      path={`/flight-search`}
-                      Component={FlightSearch}
-                    />
-                    {/*
-                    <Route
-                      path={`/flight-booking`}
-                      component={FlightBooking}
-                    />
-                    <Route
-                      path={`/confirmation`}
-                      component={Confirmation}
-                    /> */}
+                    <Route path={`/`} Component={FlightSearch} />
                   </Routes>
                 </Suspense>
               </>

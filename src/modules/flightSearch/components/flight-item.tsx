@@ -1,8 +1,8 @@
-import { Avatar, Button, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Avatar, Card, CardContent, Grid, Typography } from "@mui/material";
 import { FlightObj } from "./flight-list-one-way";
 import { makeStyles } from "@material-ui/core/styles";
-import { thousandSeparator } from "../../../utils/global-services";
 import {SteppedLineTo} from 'react-lineto';
+import { thousandSeparator } from "../../../utils/global-services";
 
 const useStyles = makeStyles(() => ({
     textAlign: {
@@ -99,11 +99,9 @@ const FlightItem = ({flightItem, index} : FlightItemProps)=> {
                         </div>
                     </Grid>
                     <Grid item container alignItems={"center"} justifyContent={"end"} xs={2} className={classes.textAlign}>
-                        <Button
-                            variant="contained"
+                        <Typography
                             color="primary"
-                            onClick={() => console.log('here')}
-                        >{`Rs. ${thousandSeparator(flightItem?.price)}`}</Button>
+                        >{`${thousandSeparator(flightItem?.price)}`}</Typography>
                     </Grid>
                 </Grid>
                 <SteppedLineTo

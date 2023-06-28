@@ -1,5 +1,4 @@
 import {
-  CircularProgress,
   Grid,
   Typography,
   Table,
@@ -30,8 +29,8 @@ const FlightListOneWay = () => {
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
   let component = null;
-  console.log(flightsState.result.length);
   const handleChangePage = (
     _: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number,
@@ -47,7 +46,6 @@ const FlightListOneWay = () => {
   };
 
   if (flightsState.loading) {
-    console.log(flightsState.loading)
     component =
       (
         <>
@@ -55,7 +53,6 @@ const FlightListOneWay = () => {
         </>
       );
   } else if (flightsState?.result?.length > 0) {
-    console.log(flightsState.result)
     component = (
       <Table>
         <TableBody>

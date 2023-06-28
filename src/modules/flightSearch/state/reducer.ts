@@ -4,16 +4,15 @@ import { FlightsActions } from "./actions";
 export type FlightsState = {
   loading: boolean
   result: FlightObj[]
-  error: string
+  error: string | null
 }
 const defaultState : FlightsState  = {
   loading: true,
   result: [],
-  error: ""
+  error: null
 };
 
 const searchListReducer = (state = defaultState, action: any) => {
-  console.log(state)
   switch (action.type) {
     case FlightsActions.GET_FLIGHT_LIST_SUCCESS:
       return {

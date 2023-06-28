@@ -1,8 +1,5 @@
 import { put } from "redux-saga/effects";
-
 import { filterBySourceDest } from "../../../utils/global-services";
-//import { get } from "../../utils/xhr";
-
 import FlightJSON from "../../../mocks/flights-one-way-mumbai.json";
 import { FlightsActions } from "./actions";
 
@@ -17,7 +14,6 @@ export type Payload = {
   }
 }
 export function* getFlightsList(payload: Payload) {
-  console.log('herererer', payload)
   // put API URL here
   let url = "";
   const jsonResponse = [...FlightJSON];

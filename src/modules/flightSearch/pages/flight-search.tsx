@@ -22,6 +22,8 @@ const FlightSearch = () => {
   const sourceRef = useRef<string | undefined>("");
   const destinationRef = useRef<string | undefined>("");
   const [deptDate, setDeptDate] = useState<string | undefined>("");
+  const [viewDeptDateHelperText, setViewDeptDateHelperText] = useState<string | null>(null);
+  const [viewReturnDateHelperText, setViewReturnDateHelperText] = useState<string | null>(null);
   const [returnDate, setReturnDate] = useState<string | undefined>("");
   const [searchDone, setSearchDone] = useState<boolean>(false);
   const [selectTrip, setSelectTrip] = useState<string | undefined>("one");
@@ -63,6 +65,7 @@ const FlightSearch = () => {
    * @description get departure time
    */
   const handleDeparture = (e: any) => {
+    new Date(e.target.value || "") < new Date() ? setViewDeptDateHelperText('choosen date cannot be in the past') : setViewDeptDateHelperText(null)
     setDeptDate (e.target.value);
   };
 
@@ -72,7 +75,6 @@ const FlightSearch = () => {
    * @description get selected trip one way or round
    */
   const handleSelectTrip = (e: any) => {
-    console.log(e)
     setSelectTrip(e.target.value);
   };
 
@@ -82,6 +84,11 @@ const FlightSearch = () => {
    * @description get return date
    */
   const handleReturn = (e: any) => {
+    new Date(e.target.value || "") < new Date()
+    || new Date(e.target.value || "") > new Date(deptDate || "") ?
+        setViewReturnDateHelperText('choosen date cannot be in the past or Return date should be bigger than dept date')
+      :
+        setViewReturnDateHelperText(null)
     setReturnDate(e.target.value);
   };
 
@@ -137,7 +144,6 @@ const FlightSearch = () => {
             handleSource(newValue||"");
           }}
           onInputChange={(_, newInputValue) => {
-            console.log(newInputValue)
             setInputSource(newInputValue);
           }}
           getOptionLabel={(option) => option}
@@ -177,6 +183,8 @@ const FlightSearch = () => {
           value={deptDate}
           onChange={handleDeparture}
           variant="outlined"
+          error={viewDeptDateHelperText ? true : false}
+          helperText={viewDeptDateHelperText}
           style={{ width: 300 }}
           InputLabelProps={{
             shrink: true
@@ -191,6 +199,8 @@ const FlightSearch = () => {
             value={returnDate}
             onChange={handleReturn}
             variant="outlined"
+            error={viewReturnDateHelperText ? true : false}
+            helperText={viewReturnDateHelperText}
             style={{ width: 300 }}
             InputLabelProps={{
               shrink: true

@@ -11,15 +11,15 @@ const validateSearch = (source: any, dest: any, deptDate: any, returnDate: any, 
   let flag = true;
 
   if (selectTrip?.toUpperCase() === "ONE") {
-    flag = source?.length === 0 || dest?.length === 0 || deptDate?.length === 0;
+    flag = source?.length === 0 || dest?.length === 0 || deptDate?.length === 0 || new Date(deptDate) < new Date();
   } else {
     flag =
       source?.length === 0 ||
       dest?.length === 0 ||
       deptDate?.length === 0 ||
-      returnDate?.length === 0;
+      returnDate?.length === 0 || 
+      new Date(returnDate)> new Date(deptDate);
   }
-
   return flag;
 };
 
@@ -44,8 +44,6 @@ const filterBySourceDest = (payload: any, response: any) => {
 
   const sourceCity = payload?.source;
   const destCity = payload?.destination;
-  console.log(sourceCity);
-  console.log(destCity)
   resultArr = tempArr.filter(
     (val) =>
       val?.deptCity?.toLowerCase() === sourceCity?.toLowerCase() &&
