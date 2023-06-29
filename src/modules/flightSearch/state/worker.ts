@@ -14,7 +14,7 @@ type Payload = {
 }
 
 export function* getAirportsList(): any {
-  let url = "http://shippypro-api.eu-west-3.elasticbeanstalk.com/api/v1/airports";
+  let url = "https://rqzhjmidu1.execute-api.eu-west-3.amazonaws.com/prod/api/v1/airports";
   try {
     const jsonResponse: any = yield call(get, url);
     const response = jsonResponse.data;
@@ -39,7 +39,7 @@ export function* getAirportsList(): any {
 
 }
 export function* getFlightsList(payload: Payload): any{
-  let url = `http://shippypro-api.eu-west-3.elasticbeanstalk.com/api/v1/flights?departureCode=${payload.request.departureCode}&arrivalCode=${payload.request.arrivalCode}&maxNoOfStops=${1}`;
+  let url = `https://rqzhjmidu1.execute-api.eu-west-3.amazonaws.com/prod/api/v1/flights?departureCode=${payload.request.departureCode}&arrivalCode=${payload.request.arrivalCode}&maxNoOfStops=${1}`;
   try {
     const jsonResponse: any = yield call(get, url);
     console.log(jsonResponse)
