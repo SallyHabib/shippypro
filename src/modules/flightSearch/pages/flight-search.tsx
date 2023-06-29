@@ -121,7 +121,7 @@ const FlightSearch = () => {
   };
 
   return (
-    <Grid container justifyContent="space-between" alignItems="center">      
+    <Grid container alignItems="center" style={{marginTop: 10}}>      
       <Grid item xs={12} md={12} style={{ marginBottom: 25 }}>
         <RadioGroup row onChange={handleSelectTrip} value={selectTrip}>
           <FormControlLabel

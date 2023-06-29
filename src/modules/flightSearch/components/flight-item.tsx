@@ -11,9 +11,6 @@ const useStyles = makeStyles(() => ({
     textAlignCenter: {
       textAlign: "center"
     },
-    cardContainer: {
-      marginBottom: 5
-    }
 }));
 
 type FlightItemProps = {
@@ -25,7 +22,7 @@ const FlightItem = ({flightItem, index} : FlightItemProps)=> {
 
     const classes = useStyles();
     return (
-        <Card className={classes.cardContainer}>
+        <Card>
             <CardContent>
                 <Grid container>
                     <Grid
