@@ -8,7 +8,7 @@ import {
   Radio,
   FormControlLabel,
   RadioGroup,
-  Typography
+  Typography,
 } from '@mui/material';
 import { validateSearch } from "../../../utils/global-services";
 import { FlightsActions } from "../state/actions";
@@ -121,8 +121,8 @@ const FlightSearch = () => {
   };
 
   return (
-    <Grid container justifyContent="space-between" alignItems="center">
-      <Grid item xs={12} md={12} style={{marginBottom: 25}}>
+    <Grid container justifyContent="space-between" alignItems="center">      
+      <Grid item xs={12} md={12} style={{ marginBottom: 25 }}>
         <RadioGroup row onChange={handleSelectTrip} value={selectTrip}>
           <FormControlLabel
             value="one"
@@ -150,7 +150,7 @@ const FlightSearch = () => {
           options={airports}
           style={{ width: 300 }}
           renderInput={(params) => (
-            <TextField {...params} label="Departure City" variant="outlined" />
+            <TextField {...params} label="Departure City/Airport" variant="outlined" />
           )}
         />
       </Grid>
@@ -170,7 +170,7 @@ const FlightSearch = () => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Arrival City"
+              label="Arrival City/Airport"
               variant="outlined"
             />
           )}
@@ -235,8 +235,8 @@ const FlightSearch = () => {
         {searchDone && (
           <FlightListOneWay />
         )}
+        </Grid>
       </Grid>
-    </Grid>
   );
 };
 

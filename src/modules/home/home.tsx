@@ -1,8 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Grid, CssBaseline, Container, Toolbar } from "@mui/material";
+import { Grid, CssBaseline, Container, Toolbar, CardMedia } from "@mui/material";
 import "../../styles.css";
-import { AppBar, Typography } from "@mui/material";
 
 const FlightSearch = lazy(() => import("../flightSearch/pages/flight-search"));
 
@@ -11,11 +10,11 @@ const Home = () => {
     <div className="root">
       <CssBaseline />
       <Router>
-        <AppBar>
-          <Toolbar>
-            <Typography>{`Flight Booking App`}</Typography>
-          </Toolbar>
-        </AppBar>
+      <CardMedia
+        component="img"
+        height="250"
+        image="/background.jpeg"          
+      />
         <Toolbar />
         <Container>
           <Grid container>

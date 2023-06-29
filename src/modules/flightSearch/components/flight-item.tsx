@@ -37,7 +37,7 @@ const FlightItem = ({flightItem, index} : FlightItemProps)=> {
                     >
                         <Avatar
                             src={'./logo.jpg'}
-                            sx={{ width: 100, height: 100 }}
+                            sx={{ width: 80, height: 100 }}
                             alt={flightItem.airlineName}
                         />
                         <div>
