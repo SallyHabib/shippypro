@@ -150,7 +150,7 @@ const FlightSearch = () => {
           options={airports}
           style={{ width: 300 }}
           renderInput={(params) => (
-            <TextField {...params} label="Source City" variant="outlined" />
+            <TextField {...params} label="Departure City" variant="outlined" />
           )}
         />
       </Grid>
@@ -170,7 +170,7 @@ const FlightSearch = () => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Destination City"
+              label="Arrival City"
               variant="outlined"
             />
           )}
