@@ -4,8 +4,9 @@ export type IFlightItem = {
     airlineLogo: string,
     deptTime: string,
     deptCity: string,
-    arivalTime: string,
-    arivalCity: string,
+    arrivalTime: string,
+    arrivalCity: string,
     noOfStops: string,
+    flightDuration: string
     price: string
   }

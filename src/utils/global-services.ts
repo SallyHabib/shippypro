@@ -32,25 +32,4 @@ const thousandSeparator = (x: any) => {
   return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 };
 
-/**
- * @function filterBySourceDest
- * @param {object} payload
- * @param {array} response
- * @description filter flight list by source and destination
- */
-const filterBySourceDest = (payload: any, response: any) => {
-  let resultArr = [];
-  let tempArr = [...response];
-
-  const sourceCity = payload?.source;
-  const destCity = payload?.destination;
-  resultArr = tempArr.filter(
-    (val) =>
-      val?.deptCity?.toLowerCase() === sourceCity?.toLowerCase() &&
-      val?.arivalCity?.toLowerCase() === destCity?.toLowerCase()
-  );
-
-  return resultArr;
-};
-
-export { validateSearch, thousandSeparator, filterBySourceDest };
+export { validateSearch, thousandSeparator };

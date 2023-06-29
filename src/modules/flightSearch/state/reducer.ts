@@ -9,34 +9,45 @@ export type FlightsState = {
   error: string | null
 }
 const defaultState : FlightsState  = {
-  loading: true,
+  loading: false,
   airports: [],
   result: [],
   error: null
 };
 
-const searchListReducer = (state = defaultState, action: any) => {
+const flightsReducer = (state = defaultState, action: any) => {
   switch (action.type) {
+
+    case FlightsActions.GET_AIRPORTS_LIST:
+      return {
+        ...state,
+        loading: true
+      };
     case FlightsActions.GET_AIRPORTS_LIST_SUCCESS:
       return {
         ...state,
+        loading: false,
         airports: action.airports
-      }
-
+      };
     case FlightsActions.GET_AIRPORTS_LIST_ERROR:
       return {
         ...state,
+        loading: false,
         error: action.error
-      }
-
-    case FlightsActions.GET_FLIGHT_LIST_SUCCESS:
+      };
+    case FlightsActions.GET_FLIGHTS_LIST:
+      return {
+        ...state,
+        loading: true
+      };
+    case FlightsActions.GET_FLIGHTS_LIST_SUCCESS:
       return {
         ...state,
         loading: false,
         result: action.result,
         error: null
       };
-    case FlightsActions.GET_FLIGHT_LIST_ERROR:
+    case FlightsActions.GET_FLIGHTS_LIST_ERROR:
       return {
         ...state,
         loading: false,
@@ -47,7 +58,7 @@ const searchListReducer = (state = defaultState, action: any) => {
       return {
         ...state,
         airports: null,
-        loading: true,
+        loading: false,
         result: null,
         error: null
       };
@@ -59,4 +70,4 @@ const searchListReducer = (state = defaultState, action: any) => {
 
 
 
-export default searchListReducer;
+export default flightsReducer;

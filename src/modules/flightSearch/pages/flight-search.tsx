@@ -16,8 +16,8 @@ import FlightListOneWay from "../components/flight-list-one-way";
 import { IAirportType } from "../../../types/AirportType";
 
 const FlightSearch = () => {
-  const sourceRef = useRef<string | undefined>("");
-  const destinationRef = useRef<string | undefined>("");
+  const sourceRef = useRef<IAirportType | undefined | null>();
+  const destinationRef = useRef<IAirportType | undefined | null>();
   const [deptDate, setDeptDate] = useState<string | undefined>("");
   const [viewDeptDateHelperText, setViewDeptDateHelperText] = useState<string | null>(null);
   const [viewReturnDateHelperText, setViewReturnDateHelperText] = useState<string | null>(null);
@@ -46,8 +46,8 @@ const FlightSearch = () => {
    * @param {object} newVal
    * @description get source city details
    */
-  const handleSource = (newVal?: string) => {
-      sourceRef.current = newVal || "";
+  const handleSource = (newVal?: IAirportType | null) => {
+      sourceRef.current = newVal;
   };
 
   /**
@@ -55,8 +55,8 @@ const FlightSearch = () => {
    * @param {string} newVal
    * @description get destination city details
    */
-  const handleDestination = (newVal?: string) => {
-    destinationRef.current = newVal || "";
+  const handleDestination = (newVal?: IAirportType | null) => {
+    destinationRef.current = newVal;
   };
 
   /**
@@ -85,7 +85,7 @@ const FlightSearch = () => {
    */
   const handleReturn = (e: any) => {
     new Date(e.target.value || "") < new Date()
-    || new Date(e.target.value || "") > new Date(deptDate || "") ?
+    || new Date(e.target.value || "") < new Date(deptDate || "") ?
         setViewReturnDateHelperText('choosen date cannot be in the past or Return date should be bigger than dept date')
       :
         setViewReturnDateHelperText(null)
@@ -98,7 +98,7 @@ const FlightSearch = () => {
    */
   const handleSearchFlight = () => {
     if (
-      sourceRef.current?.toLowerCase() === destinationRef.current?.toLowerCase()
+      sourceRef.current?.name.toLowerCase() === destinationRef.current?.name.toLowerCase()
     ) {
       setCityError(true);
       setSearchDone(false);
@@ -107,10 +107,10 @@ const FlightSearch = () => {
       setCityError(false);
     }
     dispatch({
-      type: FlightsActions.GET_FLIGHT_LIST,
+      type: FlightsActions.GET_FLIGHTS_LIST,
       request: {
-        source : sourceRef.current,
-        destination:  destinationRef.current,
+        departureCode : sourceRef.current?.code,
+        arrivalCode:  destinationRef.current?.code,
         deptDate: deptDate,
         returnDate,
         tripType: selectTrip
@@ -138,16 +138,16 @@ const FlightSearch = () => {
       </Grid>
       <Grid item xs={12} md={6} style={{marginBottom: 25}}>
         <Autocomplete
-          value={sourceRef.current as string}
+          value={sourceRef.current}
           inputValue={inputSource}
           onChange={(_, newValue) => {
-            handleSource(newValue||"");
+            handleSource(newValue);
           }}
           onInputChange={(_, newInputValue) => {
             setInputSource(newInputValue);
           }}
-          getOptionLabel={(option) => option}
-          options={airports.map((city:any)=> city.name)}
+          getOptionLabel={(option) => option.name}
+          options={airports}
           style={{ width: 300 }}
           renderInput={(params) => (
             <TextField {...params} label="Source City" variant="outlined" />
@@ -159,13 +159,13 @@ const FlightSearch = () => {
           value={destinationRef.current}
           inputValue={inputDest}
           onChange={(_, newValue) => {
-            handleDestination(newValue || "");
+            handleDestination(newValue);
           }}
           onInputChange={(_, newInputValue) => {
             setInputDest(newInputValue);
           }}
-          getOptionLabel={(option) => option}
-          options={airports.map((city: any)=> city.name)}
+          getOptionLabel={(option) => option.name}
+          options={airports}
           style={{ width: 300 }}
           renderInput={(params) => (
             <TextField

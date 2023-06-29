@@ -1,13 +1,12 @@
 import { call, put } from "redux-saga/effects";
-import { filterBySourceDest } from "../../../utils/global-services";
 import { FlightsActions } from "./actions";
 import { get } from "../../../utils/xhr";
 
 type Payload = {
   type: FlightsActions,
   request: {
-    source: string,
-    destination: string,
+    departureCode: string,
+    arrivalCode: string,
     deptDate: string,
     returnDat: string,
     tripType: string
@@ -40,17 +39,13 @@ export function* getAirportsList(): any {
 
 }
 export function* getFlightsList(payload: Payload): any{
-  // put API URL here
-  let url = "http://shippypro-api.eu-west-3.elasticbeanstalk.com/api/v1/airports";
-  // const jsonResponse = [...FlightJSON];
+  let url = `http://shippypro-api.eu-west-3.elasticbeanstalk.com/api/v1/flights?departureCode=${payload.request.departureCode}&arrivalCode=${payload.request.arrivalCode}&maxNoOfStops=${1}`;
   try {
-    // uncomment when API is available
     const jsonResponse: any = yield call(get, url);
-    console.log(jsonResponse.data)
-    const response = filterBySourceDest(payload.request, jsonResponse.data);
-    console.log(response)
+    console.log(jsonResponse)
+    const response = jsonResponse.data;
     yield put({
-      type: FlightsActions.GET_FLIGHT_LIST_SUCCESS,
+      type: FlightsActions.GET_FLIGHTS_LIST_SUCCESS,
       result: response,
       error: null
     });
@@ -58,7 +53,7 @@ export function* getFlightsList(payload: Payload): any{
     const errorObj = JSON.parse(error.message);
 
     yield put({
-      type: FlightsActions.GET_FLIGHT_LIST_ERROR,
+      type: FlightsActions.GET_FLIGHTS_LIST_ERROR,
       result: null,
       error: {
         statusCode: errorObj.statusCode,

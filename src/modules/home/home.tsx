@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Grid, CssBaseline, Container, Toolbar } from "@material-ui/core";
+import { Grid, CssBaseline, Container, Toolbar } from "@mui/material";
 import "../../styles.css";
 import { AppBar, Typography } from "@mui/material";
 

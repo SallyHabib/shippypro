@@ -5,7 +5,7 @@ import {
   TableBody,
   TableCell,
   TableRow,
-} from "@material-ui/core";
+} from "@mui/material";
 import TablePagination from '@mui/base/TablePagination';
 import { useSelector } from "react-redux";
 import { useState } from "react";

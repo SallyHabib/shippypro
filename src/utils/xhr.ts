@@ -3,18 +3,18 @@ const get = (url: string) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
-    }
+    },
   }).then((response) => {
     switch (response.status) {
-      case 200:
+      case 200: 
         return response.json();
       default:
-        throw new Error(
-          JSON.stringify({
-            statusCode: response.status,
-            errorMessage: "Unable to fetch data"
-          })
-        );
+          throw new Error(
+            JSON.stringify({
+              statusCode: response.status,
+              errorMessage: "Unable to fetch data"
+            })
+          );
     }
   });
 };

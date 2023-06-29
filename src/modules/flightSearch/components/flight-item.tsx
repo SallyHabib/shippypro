@@ -24,7 +24,6 @@ type FlightItemProps = {
 const FlightItem = ({flightItem, index} : FlightItemProps)=> {
 
     const classes = useStyles();
-
     return (
         <Card className={classes.cardContainer}>
             <CardContent>
@@ -92,16 +91,16 @@ const FlightItem = ({flightItem, index} : FlightItemProps)=> {
                         className={classes.textAlignCenter}
                     >
                         <div className={`D-${index}`}>
-                            <Typography>{flightItem.arivalTime}</Typography>
+                            <Typography>{flightItem.arrivalTime}</Typography>
                             <Typography variant="caption">
-                                {flightItem.arivalCity}
+                                {flightItem.arrivalCity}
                             </Typography>
                         </div>
                     </Grid>
                     <Grid item container alignItems={"center"} justifyContent={"end"} xs={2} className={classes.textAlign}>
                         <Typography
                             color="primary"
-                        >{`${thousandSeparator(flightItem?.price)}`}</Typography>
+                        >{`£${thousandSeparator(flightItem?.price)}`}</Typography>
                     </Grid>
                 </Grid>
                 <SteppedLineTo
