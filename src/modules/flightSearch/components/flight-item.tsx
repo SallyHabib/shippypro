@@ -97,7 +97,7 @@ const FlightItem = ({flightItem, index} : FlightItemProps)=> {
                             </Typography>
                         </div>
                     </Grid>
-                    <Grid item container alignItems={"center"} justifyContent={"end"} xs={2} className={classes.textAlign}>
+                    <Grid item container alignItems={"center"} justifyContent={"center"} xs={2} className={classes.textAlign}>
                         <Typography
                             color="primary"
                         >{`£${thousandSeparator(flightItem?.price)}`}</Typography>
